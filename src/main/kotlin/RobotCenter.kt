@@ -9,7 +9,7 @@ class RobotCenter {
 
     private var activeRobot: Robot? = null
 
-    fun processCommand(input: String):String {
+    fun processCommand(input: String): String {
 
         if (input.matches(placeRegex)) {
             debuggerPrint("Placing Robot...")
@@ -36,10 +36,10 @@ class RobotCenter {
             if (input == "REPORT") {
                 return this.summaryReport() +
                         if (this.activeRobot != null) {
-                            "\n"+this.activeRobot?.processCommand(input)}
-                        else {
-                    ""
-                }
+                            "\n" + this.activeRobot?.processCommand(input)
+                        } else {
+                            ""
+                        }
             }
 
             // Return nothing but still process command if not reporting.
@@ -52,13 +52,13 @@ class RobotCenter {
 
     private fun summaryReport(): String {
         return "${this.robotMap.size} ${
-                if (this.robotMap.size == 1) {
-                    "robot is"
-                } else "robots are"
-            } active.\n" + "The active robot's ID is ${this.activeRobot?.id ?: "therefore not set"}."
+            if (this.robotMap.size == 1) {
+                "robot is"
+            } else "robots are"
+        } active.\n" + "The active robot's ID is ${this.activeRobot?.id ?: "therefore not set"}."
     }
 
-    fun destroyRobots(){
+    fun destroyRobots() {
         activeRobot = null
         robotMap.clear()
     }

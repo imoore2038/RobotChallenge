@@ -13,7 +13,7 @@ const val GRID_MAX = 4
 class Robot(var id: Int, var xPos: Int, var yPos: Int, var facing: Int) {
 
     // Top-level logic for processing commands.
-    fun processCommand(command: String): String{
+    fun processCommand(command: String): String {
         when (command) {
             "LEFT" -> this.turnLeft()
             "RIGHT" -> this.turnRight()
@@ -42,8 +42,7 @@ class Robot(var id: Int, var xPos: Int, var yPos: Int, var facing: Int) {
             0 -> {
                 if (checkValidPosition(this.xPos, this.yPos + 1)) {
                     this.yPos += 1
-                }
-                else {
+                } else {
                     debuggerPrint("Cannot move that way.")
                 }
             }
