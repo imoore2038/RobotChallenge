@@ -13,14 +13,16 @@ const val GRID_MAX = 4
 class Robot(var id: Int, var xPos: Int, var yPos: Int, var facing: Int) {
 
     // Top-level logic for processing commands.
-    fun processCommand(command: String) {
+    fun processCommand(command: String): String{
         when (command) {
             "LEFT" -> this.turnLeft()
             "RIGHT" -> this.turnRight()
             "MOVE" -> this.move()
-            "REPORT" -> this.report()
+            "REPORT" -> return this.report()
             else -> debuggerPrint("$command is not a valid command.")
         }
+        // Returns empty string if not reporting
+        return ""
     }
 
     private fun turnLeft() {
@@ -35,28 +37,38 @@ class Robot(var id: Int, var xPos: Int, var yPos: Int, var facing: Int) {
     }
 
     private fun move() {
+        debuggerPrint("Moving Robot...")
         when (facing) {
             0 -> {
                 if (checkValidPosition(this.xPos, this.yPos + 1)) {
                     this.yPos += 1
+                }
+                else {
+                    debuggerPrint("Cannot move that way.")
                 }
             }
 
             1 -> {
                 if (checkValidPosition(this.xPos + 1, this.yPos)) {
                     this.xPos += 1
+                } else {
+                    debuggerPrint("Cannot move that way.")
                 }
             }
 
             2 -> {
                 if (checkValidPosition(this.xPos, this.yPos - 1)) {
                     this.yPos -= 1
+                } else {
+                    debuggerPrint("Cannot move that way.")
                 }
             }
 
             3 -> {
                 if (checkValidPosition(this.xPos - 1, this.yPos)) {
                     this.xPos -= 1
+                } else {
+                    debuggerPrint("Cannot move that way.")
                 }
             }
         }
@@ -73,9 +85,7 @@ class Robot(var id: Int, var xPos: Int, var yPos: Int, var facing: Int) {
         return "INVALID DIRECTION: ${this.facing}"
     }
 
-    private fun report() {
-        println("${this.xPos},${this.yPos}," + this.facingToString())
-    }
+    private fun report(): String = "${this.xPos},${this.yPos}," + this.facingToString()
 
     // Factory pattern as companion object for creating robots from String input and checking valid board positions
     companion object Factory {
@@ -108,4 +118,4 @@ class Robot(var id: Int, var xPos: Int, var yPos: Int, var facing: Int) {
     }
 }
 
-class RobotException(message: String): Exception(message)
+class RobotException(message: String) : Exception(message)

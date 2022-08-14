@@ -1,11 +1,14 @@
 fun main(args: Array<String>) {
     var input = ""
+    var output = ""
     val robotCenter: RobotCenter = RobotCenter()
 
-    while(true){
+    while (true) {
         debuggerPrint("Awaiting Input:")
-        input=readLine().toString()
-
-        robotCenter.processCommand(input)
+        input = readLine().toString()
+        output = robotCenter.processCommand(input)
+        if (output.isNotEmpty()) {
+            println(output)
+        }
     }
 }
